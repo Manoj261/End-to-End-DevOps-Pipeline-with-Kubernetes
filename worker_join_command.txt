@@ -1,0 +1,21 @@
+Kubernetes Worker Join Command
+
+Run the following command on the Kubernetes Master node:
+
+sudo kubeadm token create --print-join-command
+
+Example Output
+
+sudo kubeadm join <MASTER_PRIVATE_IP>:6443 \
+--token <TOKEN> \
+--discovery-token-ca-cert-hash sha256:<HASH>
+
+Copy the generated command and execute it on every Kubernetes Worker node.
+
+After all worker nodes have joined the cluster, verify the status:
+
+kubectl get nodes
+
+Expected Output
+
+All nodes should be in the Ready state.

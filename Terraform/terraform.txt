@@ -1,0 +1,128 @@
+Terraform Infrastructure Setup Guide
+
+Terraform is used to provision the AWS infrastructure required for this project.
+
+Prerequisites
+
+1. AWS Account
+2. AWS Access Key and Secret Key
+
+Terraform Files
+
+provider.tf
+Contains the AWS provider configuration.
+
+main.tf
+Creates the required EC2 instances.
+
+outputs.tf
+Displays useful information such as public and private IP addresses after infrastructure creation.
+
+Terraform Workflow
+
+Step 1: Initialize Terraform
+
+terraform init
+
+Downloads the required AWS provider plugins.
+
+----------------------------------------------------
+
+Step 2: Validate Configuration
+
+terraform validate
+
+Checks whether the Terraform configuration files are valid.
+
+----------------------------------------------------
+
+Step 3: Generate Execution Plan
+
+terraform plan
+
+Displays the resources that Terraform will create.
+
+(Optional)
+
+terraform plan -out=tfplan
+
+Saves the execution plan for later use.
+
+----------------------------------------------------
+
+Step 4: Create Infrastructure
+
+terraform apply
+
+or
+
+terraform apply tfplan
+
+Type:
+
+yes
+
+Terraform creates the required AWS infrastructure.
+
+----------------------------------------------------
+
+Step 5: View Outputs
+
+terraform output
+
+Displays the Public IPs and Private IPs of the created EC2 instances.
+
+----------------------------------------------------
+
+Step 6: Verify AWS Resources
+
+Login to the AWS Management Console.
+
+Navigate to:
+
+EC2 → Instances
+
+Verify that all EC2 instances have been created successfully.
+
+----------------------------------------------------
+
+Step 7: Destroy Infrastructure (Optional)
+
+Destroy all the infrastructure after your project completion
+
+terraform destroy
+
+Type:
+
+yes
+
+Terraform deletes all the resources created during the project.
+
+----------------------------------------------------
+
+Project Infrastructure
+
+Terraform creates:
+
+• 1 Kubernetes Master Node
+• 2 Kubernetes Worker Nodes
+
+These instances are later configured using Ansible.
+
+----------------------------------------------------
+
+Terraform Lifecycle
+
+terraform init
+        ↓
+terraform validate
+        ↓
+terraform plan
+        ↓
+terraform apply
+        ↓
+Infrastructure Created
+        ↓
+terraform output
+        ↓
+Configure using Ansible

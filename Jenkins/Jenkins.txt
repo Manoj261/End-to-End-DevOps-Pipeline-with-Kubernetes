@@ -1,0 +1,27 @@
+Jenkins Configuration Guide
+
+Configuration Steps
+
+1. Install all the suggested plugins.
+2. Create a Jenkins Agent using the Kubernetes Master node.
+3. Configure GitHub repository:
+   https://github.com/Manoj261/website-devops
+4. Add Docker Hub credentials in Jenkins.
+5. Configure SSH credentials for the Kubernetes Master node.
+6. Create a Pipeline Job.
+7. Use the provided Jenkinsfile.
+8. Trigger the pipeline manually or by pushing changes to the main branch.
+
+Pipeline Workflow
+
+GitHub Repository
+        ↓
+Jenkins Pipeline
+        ↓
+Docker Image Build
+        ↓
+Docker Hub Push
+        ↓
+Kubernetes Deployment
+        ↓
+Application Available via NodePort (30008)

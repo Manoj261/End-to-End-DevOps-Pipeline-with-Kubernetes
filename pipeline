@@ -1,0 +1,46 @@
+pipeline {
+    agent none
+    environment {
+        DOCKERHUB_CREDENTIALS = credentials("dockerhub_credentials")
+    }
+    stages {
+        stage('git') {
+            agent {
+                label "K8-M"
+            }
+            steps {
+                script {
+                    git branch: 'main',
+    			url: 'https://github.com/Manoj261/website-devops.git'
+                }
+            }
+        }
+        stage('docker') {
+            agent {
+                label "K8-M"
+            }
+            steps {
+                script {
+                    sh 'sudo docker build -t manoj2610/majorproject .'
+                    sh 'sudo docker login -u ${DOCKERHUB_CREDENTIALS_USR} -p ${DOCKERHUB_CREDENTIALS_PSW}'
+                    sh 'sudo docker push manoj2610/majorproject'
+                }
+            }
+        }
+        stage('K8s') {
+            agent {
+                label "K8-M"
+            }
+            steps {
+                script {
+
+                    sh 'sudo kubectl delete deployment my-deployment --ignore-not-found=true'
+                    sh 'sudo kubectl create deployment my-deployment --replicas=2 --image=manoj2610/majorproject'
+                    // sh 'kubectl apply -f deploy.yaml'
+                    sh 'sudo kubectl expose deployment my-deployment --type=NodePort --port=80 --target-port=80'
+                   // sh 'sudo kubectl apply -f svc.yml'
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,30 @@
+Ansible Inventory Configuration
+
+Edit the hosts file as the root user:
+
+sudo vim /etc/ansible/hosts
+
+Add the private IP addresses of the infrastructure created using Terraform.
+
+Example:
+
+[k8sm]
+<MASTER_PRIVATE_IP> ansible_user=ubuntu
+
+[k8ss]
+<WORKER1_PRIVATE_IP> ansible_user=ubuntu
+<WORKER2_PRIVATE_IP> ansible_user=ubuntu
+
+Replace the placeholder IP addresses with the actual EC2 instance private IPs.
+
+Before running the playbook, verify SSH connectivity:
+
+ssh ubuntu@<MASTER_PRIVATE_IP>
+ssh ubuntu@<WORKER1_PRIVATE_IP>
+ssh ubuntu@<WORKER2_PRIVATE_IP>
+
+Test Ansible connectivity:
+
+ansible all -m ping
+
+If all nodes return SUCCESS, the inventory has been configured correctly.
