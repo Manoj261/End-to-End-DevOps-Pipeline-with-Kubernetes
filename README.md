@@ -92,37 +92,6 @@ Server configuration is automated using **Ansible**.
 
 ---
 
-## Project Structure
-
-End-to-End DevOps Pipeline with Kubernetes/
-│
-├── Ansible/
-│   ├── docker.sh
-│   ├── Hosts.txt
-│   ├── master.sh
-│   ├── worker.sh
-│   └── play.yaml
-│
-├── Jenkins/
-│   └── Jenkins.txt
-│
-├── Terraform/
-│   ├── provider.tf
-│   ├── main.tf
-│   ├── outputs.tf
-│   └── Terraform.txt
-│
-├── Kubernetes/
-│   ├── deployment.yaml
-│   └── service.yaml
-│
-├── install_tools.sh
-├── pipeline
-├── worker_join_command.txt
-└── README.md
-
----
-
 ## Features
 
 - Infrastructure as Code (IaC) using Terraform
